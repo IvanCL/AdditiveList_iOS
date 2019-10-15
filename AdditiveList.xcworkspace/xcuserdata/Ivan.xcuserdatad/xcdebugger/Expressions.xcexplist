@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "AdditiveController.textChange(_:):AdditiveController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "findAdditiveTxt.text">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "AdditiveController.findCoincidences():AdditiveController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "additivesToShow">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

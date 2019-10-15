@@ -14,35 +14,47 @@ class AdditiveController: UIViewController {
     var additivesToShow = [Additive]()
     var additiveSelected: Additive?
     
+    
     @IBOutlet weak var findAdditiveTxt: UITextField!
     @IBOutlet weak var additiveTable: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         getAdditivesFromDB()
-        additiveTable.register(UITableViewCell.self, forCellReuseIdentifier: "itemAdditive")
+        
                 
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         additives = DataManager.dataManager.loadAdditives()
-        additiveTable.reloadData()
+        //additiveTable.reloadData()
     }
 
-    
-    @IBAction func textFieldChanged(_ sender: UITextField) {
-        print("Escribiendo")
-        if findAdditiveTxt.text!.count > 2{
-             if !additives.isEmpty {
-                 findCoincidences()
-             }else{
-                 getAdditivesFromDB()
-                 findCoincidences()
-             }
-         }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+            if let detailItemController = segue.destination as? DetailItemController {
+                detailItemController.additive = additiveSelected
+                detailItemController.delegate = self
+            }       
     }
+    
+    @IBAction func textChange(_ sender: UITextField) {
+        if findAdditiveTxt != nil && findAdditiveTxt.text!.count >= 2{
+                 if !additives.isEmpty {
+                     findCoincidences()
+                 }else{
+                     getAdditivesFromDB()
+                     findCoincidences()
+                 }
+                additiveTable.register(UITableViewCell.self, forCellReuseIdentifier: "itemAdditive")
+                additiveTable.reloadData()
+             }
+    }
+    
+
     private func findCoincidences(){
+        additivesToShow.removeAll()
         for additive in additives{
             if additive.numb.lowercased().contains(findAdditiveTxt.text!.lowercased()) || additive.numb.lowercased().contains("e" + findAdditiveTxt.text!.lowercased()) || additive.name.lowercased().contains(findAdditiveTxt.text!.lowercased())  {
                 additivesToShow.append(additive)
@@ -57,29 +69,54 @@ class AdditiveController: UIViewController {
 }
     extension AdditiveController: UITableViewDataSource, UITableViewDelegate {
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return additives.count
+            return additivesToShow.count
         }
         
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             // El recibido
-            let additive = additives[indexPath.row]
-            
+            var additive: Additive?
+            if additivesToShow.isEmpty{
+                additive = additives[indexPath.row]
+            }else {
+                additive = additivesToShow[indexPath.row]
+            }
             let cell = tableView.dequeueReusableCell(withIdentifier: "itemAdditive", for: indexPath)
             
-            cell.textLabel?.text = additive.description
+            cell.textLabel?.text = additive!.numb + " - " +  additive!.name
+            
+            if additive!.origin.lowercased().elementsEqual("no vegano") == true{
+                cell.backgroundColor = .red
+            }else if additive!.origin.lowercased().elementsEqual("dudoso") == true{
+                cell.backgroundColor = .orange
+            }else{
+                cell.backgroundColor = .green
+            }
             
             
             return cell
         }
         
         func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            additiveSelected = additives[indexPath.row]
+            additiveSelected = additivesToShow[indexPath.row]
             
-            performSegue(withIdentifier: "itemDetailAdditive", sender: nil)
+            performSegue(withIdentifier: "itemDetailAdditive", sender: additiveSelected)
         }
+    
         
+
         
+}
+    
+extension AdditiveController: DetailItemControllerDelegate {
+    
+    func wasTappedOkButton() {
+        /*students = DataManager.dataManager.loadStudents()
+        studentTable.reloadData()*/
+        
+        dismiss(animated: true, completion: nil)
     }
     
+    
+}
 
 

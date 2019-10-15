@@ -10,8 +10,7 @@ import Foundation
 import GRDB
 
 
-struct Product {
-    let id: String
+struct Product: Codable {
     let name: String
     let description: String
     let uses: String
@@ -21,7 +20,6 @@ struct Product {
 
 extension Product: FetchableRecord, PersistableRecord{
     func encode(to container: inout PersistenceContainer) {
-        container["id"] = id
         container["name"] = name
         container["description"] =   description
         container["uses"] = uses
@@ -29,11 +27,17 @@ extension Product: FetchableRecord, PersistableRecord{
     }
     
     init(row: Row){
-        id = row["id"]
         name = row["name"]
         description = row["description"]
         uses = row["uses"]
         origin = row["origin"]
+    }
+    
+    init(_ dictionary: [String: Any]){
+        name = dictionary["name"] as! String
+        description = dictionary["description"] as! String
+        uses = dictionary["uses"] as! String
+        origin = dictionary["origin"] as! String
     }
     
 }

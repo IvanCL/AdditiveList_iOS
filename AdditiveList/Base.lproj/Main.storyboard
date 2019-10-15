@@ -11,20 +11,23 @@
         <!--Busqueda de productos-->
         <scene sceneID="Jr1-Th-Zhb">
             <objects>
-                <viewController title="Busqueda de productos" id="ikz-Zt-HUV" sceneMemberID="viewController">
+                <viewController title="Busqueda de productos" id="ikz-Zt-HUV" customClass="ProductsController" customModule="AdditiveList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Eq1-pZ-Pf6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Buscar productos por nombre" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xqO-vG-hlo">
                                 <rect key="frame" x="20" y="63" width="374" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="textChange:" destination="ikz-Zt-HUV" eventType="editingChanged" id="loj-Ux-Ahg"/>
+                                </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Wfb-Ki-2AI">
                                 <rect key="frame" x="20" y="126" width="374" height="684"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="sectionIndexBackgroundColor" red="0.45835431809999999" green="0.81556864650000005" blue="0.39945753499999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -72,6 +75,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ikz-Zt-HUV" id="do6-bq-3E9"/>
+                                    <outlet property="delegate" destination="ikz-Zt-HUV" id="dmF-s5-FVO"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IsN-11-iHA">
                                 <rect key="frame" x="346" y="816" width="43" height="34"/>
@@ -85,6 +92,10 @@
                         <color key="backgroundColor" red="0.45835431809999999" green="0.81556864650000005" blue="0.39945753499999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="l57-gn-Opf"/>
                     </view>
+                    <connections>
+                        <outlet property="findProductTxt" destination="xqO-vG-hlo" id="clB-VE-opG"/>
+                        <outlet property="productTable" destination="Wfb-Ki-2AI" id="nDn-b1-WRX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yaB-ma-2DF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -93,7 +104,7 @@
         <!--Detalle de producto-->
         <scene sceneID="F8j-Hb-TSO">
             <objects>
-                <viewController title="Detalle de producto" id="Gen-1a-TQY" sceneMemberID="viewController">
+                <viewController title="Detalle de producto" id="Gen-1a-TQY" customClass="DetailItemController" customModule="AdditiveList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3S8-0f-ec3">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -174,6 +185,13 @@
                         <color key="backgroundColor" red="0.45835431809999999" green="0.81556864650000005" blue="0.39945753499999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="tjJ-1k-KPz"/>
                     </view>
+                    <connections>
+                        <outlet property="productDescription" destination="bPN-4I-sLf" id="qTz-et-HAy"/>
+                        <outlet property="productName" destination="0KN-kp-Cel" id="xHg-so-NBr"/>
+                        <outlet property="productOrigin" destination="mgj-6L-TQe" id="hOc-qs-Zyl"/>
+                        <outlet property="productUses" destination="5bm-2r-9wK" id="Ddi-Sg-yCh"/>
+                        <outlet property="productVegIcon" destination="NDl-K4-AJS" id="pDx-zg-hx2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p02-Tu-p2Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -240,16 +258,16 @@
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Buscar nº(E120...) o nombre de aditivos" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nc8-0t-dX1">
                                 <rect key="frame" x="20" y="62" width="374" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
-                                    <action selector="textFieldChanged:" destination="KfR-Gb-PEm" eventType="editingChanged" id="n2V-C0-2cK"/>
+                                    <action selector="textChange:" destination="ptn-EK-UqL" eventType="editingChanged" id="dL7-9x-juy"/>
                                 </connections>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RUr-8L-Aik">
                                 <rect key="frame" x="20" y="131" width="374" height="664"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <color key="sectionIndexBackgroundColor" red="0.45835431809999999" green="0.81556864650000005" blue="0.39945753499999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -297,6 +315,10 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="ptn-EK-UqL" id="zqH-id-pg2"/>
+                                    <outlet property="delegate" destination="ptn-EK-UqL" id="hFd-Kv-4JI"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EdA-Qb-ndE">
                                 <rect key="frame" x="350" y="801" width="38" height="34"/>
@@ -313,17 +335,17 @@
                     <navigationItem key="navigationItem" id="Y0I-Te-raD"/>
                     <connections>
                         <outlet property="additiveTable" destination="RUr-8L-Aik" id="Jl4-4C-TZ4"/>
+                        <outlet property="findAdditiveTxt" destination="nc8-0t-dX1" id="MTb-Tn-Fyk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhk-cw-BJc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="KfR-Gb-PEm" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1357.9710144927537" y="-222.32142857142856"/>
         </scene>
         <!--Detalle de aditivo-->
         <scene sceneID="hQw-jh-dKP">
             <objects>
-                <viewController title="Detalle de aditivo" id="5IF-cG-ZPW" sceneMemberID="viewController">
+                <viewController title="Detalle de aditivo" id="5IF-cG-ZPW" customClass="DetailItemController" customModule="AdditiveList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MRr-pK-SPe">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -360,7 +382,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nameAdditiveLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Bd-Qh-LbZ">
                                 <rect key="frame" x="20" y="133" width="374" height="65"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -425,6 +447,15 @@
                         <color key="backgroundColor" red="0.45835431809999999" green="0.81556864650000005" blue="0.39945753499999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="N2p-kD-J54"/>
                     </view>
+                    <connections>
+                        <outlet property="additiveOrigin" destination="BJJ-hV-PAq" id="ePx-dB-TRa"/>
+                        <outlet property="additiveUses" destination="2d1-Xa-fL5" id="ASl-Lc-5g7"/>
+                        <outlet property="additiveVegIcon" destination="BRN-NZ-W9a" id="fgZ-TV-iXt"/>
+                        <outlet property="descriptionAdditive" destination="THZ-KQ-RhK" id="pIM-7P-akh"/>
+                        <outlet property="nameAdditive" destination="9Bd-Qh-LbZ" id="Yui-qb-HWs"/>
+                        <outlet property="numbAdditive" destination="c4y-UG-Sgr" id="wfG-EN-BNV"/>
+                        <outlet property="sideEffects" destination="Ja0-qx-hFX" id="jF1-HV-GHN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gB7-st-Yzj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -439,8 +470,8 @@
         <image name="vegan_icon_ok" width="158.66667175292969" height="178.33332824707031"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Umw-Nu-Bhn"/>
+        <segue reference="dxL-NS-JdR"/>
         <segue reference="7D8-Dk-56Q"/>
-        <segue reference="82m-AX-LfQ"/>
+        <segue reference="L1e-zs-NtS"/>
     </inferredMetricsTieBreakers>
 </document>
