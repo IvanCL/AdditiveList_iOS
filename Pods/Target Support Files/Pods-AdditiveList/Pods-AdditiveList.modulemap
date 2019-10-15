@@ -1,0 +1,6 @@
+framework module Pods_AdditiveList {
+  umbrella header "Pods-AdditiveList-umbrella.h"
+
+  export *
+  module * { export * }
+}
