@@ -201,7 +201,7 @@
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController title="Menu" id="BYZ-38-t0r" customClass="ViewController" customModule="AdditiveList" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                    <view key="view" clipsSubviews="YES" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -269,6 +269,7 @@
                                 <rect key="frame" x="20" y="131" width="374" height="664"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="separatorColor" red="0.45835431809999999" green="0.81556864650000005" blue="0.39945753499999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.45835431809999999" green="0.81556864650000005" blue="0.39945753499999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemAdditive" rowHeight="83" id="el0-Lb-ioV" userLabel="itemAddtive">
@@ -278,32 +279,40 @@
                                             <rect key="frame" x="0.0" y="0.0" width="374" height="83"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="nameAddiListLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HlB-XH-cvy">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="nameAddiListLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HlB-XH-cvy">
                                                     <rect key="frame" x="90" y="0.0" width="127" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="descAddiLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7l1-EX-Hcp">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="descAddiLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7l1-EX-Hcp">
                                                     <rect key="frame" x="14" y="22" width="95" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="originAddiLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsU-ce-Kgs">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="originAddiLbl" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JsU-ce-Kgs">
                                                     <rect key="frame" x="14" y="51" width="101" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="vegan_icon_ok" translatesAutoresizingMaskIntoConstraints="NO" id="ato-yX-WHO">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="vegan_icon_ok" translatesAutoresizingMaskIntoConstraints="NO" id="ato-yX-WHO">
                                                     <rect key="frame" x="311" y="0.0" width="55" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="55" id="A4L-e8-jQv"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="HlB-XH-cvy" firstAttribute="leading" secondItem="bFz-f1-64l" secondAttribute="leading" constant="90" id="08r-Jn-fwm"/>
+                                                <constraint firstItem="ato-yX-WHO" firstAttribute="top" secondItem="bFz-f1-64l" secondAttribute="topMargin" constant="-11" id="9Oy-ZD-yMK"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="ato-yX-WHO" secondAttribute="bottom" constant="51" id="BMh-q7-Zai"/>
+                                                <constraint firstItem="ato-yX-WHO" firstAttribute="top" secondItem="HlB-XH-cvy" secondAttribute="top" id="BNa-uW-weG"/>
                                                 <constraint firstAttribute="trailing" secondItem="JsU-ce-Kgs" secondAttribute="trailing" constant="259" id="Fis-HU-PPy"/>
                                                 <constraint firstItem="JsU-ce-Kgs" firstAttribute="leading" secondItem="bFz-f1-64l" secondAttribute="leading" constant="14" id="KM2-Wm-5EF"/>
+                                                <constraint firstItem="JsU-ce-Kgs" firstAttribute="top" secondItem="7l1-EX-Hcp" secondAttribute="bottom" constant="8" id="MQb-MA-Rz0"/>
+                                                <constraint firstItem="7l1-EX-Hcp" firstAttribute="top" secondItem="HlB-XH-cvy" secondAttribute="bottom" constant="1" id="Qcy-oi-aWP"/>
                                                 <constraint firstItem="7l1-EX-Hcp" firstAttribute="leading" secondItem="bFz-f1-64l" secondAttribute="leading" constant="14" id="Uao-de-yLQ"/>
                                                 <constraint firstAttribute="trailing" secondItem="7l1-EX-Hcp" secondAttribute="trailing" constant="265" id="jyQ-ac-jI5"/>
                                                 <constraint firstAttribute="trailing" secondItem="JsU-ce-Kgs" secondAttribute="trailing" constant="259" id="yIv-Sg-RYB"/>
@@ -470,6 +479,8 @@
         <image name="vegan_icon_ok" width="158.66667175292969" height="178.33332824707031"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Zrb-fd-DbH"/>
+        <segue reference="9sL-Rr-c8O"/>
         <segue reference="dxL-NS-JdR"/>
         <segue reference="7D8-Dk-56Q"/>
         <segue reference="L1e-zs-NtS"/>

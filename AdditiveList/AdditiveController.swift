@@ -56,7 +56,7 @@ class AdditiveController: UIViewController {
     private func findCoincidences(){
         additivesToShow.removeAll()
         for additive in additives{
-            if additive.numb.lowercased().contains(findAdditiveTxt.text!.lowercased()) || additive.numb.lowercased().contains("e" + findAdditiveTxt.text!.lowercased()) || additive.name.lowercased().contains(findAdditiveTxt.text!.lowercased())  {
+            if (additive.numb.lowercased().starts(with: "e") && additive.numb.lowercased().contains( findAdditiveTxt.text!.lowercased())) || additive.name.lowercased().contains(findAdditiveTxt.text!.lowercased())  {
                 additivesToShow.append(additive)
                 
             }
